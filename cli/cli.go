@@ -3,6 +3,7 @@ package cli
 import (
 	"bufio"
 	"fmt"
+	"github.com/virepri/clipman-server/cli/commands"
 	"github.com/virepri/clipman-server/shared"
 	"os"
 	"strings"
@@ -22,8 +23,7 @@ func StartCLI() {
 		fmt.Print("> ")
 		input := strings.Split(readLine(), " ")
 
-		//TODO: handle input!
-		fmt.Println(input)
+		commands.Aliases[input[0]](input[1:])
 	}
 }
 

@@ -14,7 +14,9 @@ func handleConn(conn net.Conn) {
 		if _, err := conn.Read(buff); err == nil {
 			cmd := commands.ParseCmd(buff)
 
-			commands.Aliases[cmd.Cmd](cmd.Args)
+			if v, ok := commands.Aliases[cmd.Cmd]; ok {
+				v(cmd.Args)
+			}
 		}
 	}
 }

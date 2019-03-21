@@ -23,7 +23,11 @@ func StartCLI() {
 		fmt.Print("> ")
 		input := strings.Split(readLine(), " ")
 
-		commands.Aliases[input[0]](input[1:])
+		if v, ok := commands.Aliases[input[0]]; ok {
+			v(input[1:])
+		} else {
+			fmt.Println(input[0], "is not an available command. Check help.")
+		}
 	}
 }
 

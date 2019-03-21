@@ -7,7 +7,7 @@ import (
 
 func TestParseCmdOnly(t *testing.T) {
 	cmdOnly := []byte{3, 0}
-	expected := Command{Cmd:3, Args:make([]string, 0)}
+	expected := Command{Cmd: 3, Args: make([]string, 0)}
 
 	if cmd := ParseCmd(cmdOnly); !reflect.DeepEqual(cmd, expected) {
 		t.Error("FAILED cmdOnly!")
@@ -19,8 +19,8 @@ func TestParseCmdOnly(t *testing.T) {
 }
 
 func TestParseCmdLF(t *testing.T) {
-	cmdLF := []byte{10,0}
-	expected := Command{Cmd:10, Args:make([]string, 0)}
+	cmdLF := []byte{10, 0}
+	expected := Command{Cmd: 10, Args: make([]string, 0)}
 
 	if cmd := ParseCmd(cmdLF); !reflect.DeepEqual(cmd, expected) {
 		t.Error("FAILED cmdLF!")
@@ -33,7 +33,7 @@ func TestParseCmdLF(t *testing.T) {
 
 func TestParseCmdOneArg(t *testing.T) {
 	cmdOneArg := []byte{3, 10, 65, 65, 65, 0}
-	expected := Command{Cmd:3, Args:[]string{"AAA"}}
+	expected := Command{Cmd: 3, Args: []string{"AAA"}}
 
 	if cmd := ParseCmd(cmdOneArg); !reflect.DeepEqual(cmd, expected) {
 		t.Error("FAILED cmdOneArg!")
@@ -45,8 +45,8 @@ func TestParseCmdOneArg(t *testing.T) {
 }
 
 func TestParseCmdOneArgFEnd(t *testing.T) {
-	cmdOneArgLFEnd := []byte{3,10, 65, 10}
-	expected := Command{Cmd:3, Args:[]string{"A"}}
+	cmdOneArgLFEnd := []byte{3, 10, 65, 10}
+	expected := Command{Cmd: 3, Args: []string{"A"}}
 
 	if cmd := ParseCmd(cmdOneArgLFEnd); !reflect.DeepEqual(cmd, expected) {
 		t.Error("FAILED cmdOneArgLFEnd!")
@@ -58,8 +58,8 @@ func TestParseCmdOneArgFEnd(t *testing.T) {
 }
 
 func TestParseCmdTwoArg(t *testing.T) {
-	cmdTwoArg := []byte{3,10,65,10,65,0}
-	expected := Command{Cmd:3, Args:[]string{"A", "A"}}
+	cmdTwoArg := []byte{3, 10, 65, 10, 65, 0}
+	expected := Command{Cmd: 3, Args: []string{"A", "A"}}
 
 	if cmd := ParseCmd(cmdTwoArg); !reflect.DeepEqual(cmd, expected) {
 		t.Error("FAILED cmdTwoArg!")
@@ -71,8 +71,8 @@ func TestParseCmdTwoArg(t *testing.T) {
 }
 
 func TestParseCmdUnexpectedArg(t *testing.T) {
-	cmdUnexpectedArg := []byte{3,10,65,10,65}
-	expected := Command{Cmd:3, Args:[]string{"A"}}
+	cmdUnexpectedArg := []byte{3, 10, 65, 10, 65}
+	expected := Command{Cmd: 3, Args: []string{"A"}}
 
 	if cmd := ParseCmd(cmdUnexpectedArg); !reflect.DeepEqual(cmd, expected) {
 		t.Error("FAILED cmdUnexpectedArg!")

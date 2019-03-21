@@ -8,15 +8,17 @@ import (
 
 var BufferSize = 1024
 var BindTo = ":7606"
+var PassHash = "" //Hashes should be SHA256
 var ConfigLocation = ""
 
 type cfg struct {
 	Buffer int
-	Bind   string
+	Bind string
+	PassHash string
 }
 
 func SaveCFG() {
-	c := cfg{BufferSize, BindTo}
+	c := cfg {BufferSize, BindTo, PassHash}
 
 	buff, _ := json.Marshal(c)
 	if f, err := os.OpenFile(ConfigLocation, os.O_CREATE|os.O_RDWR, 0554); err == nil {
@@ -39,6 +41,7 @@ func LoadCFG() {
 				if err := json.Unmarshal(buff, &c); err == nil {
 					BufferSize = c.Buffer
 					BindTo = c.Bind
+					PassHash = c.PassHash
 					return
 				}
 			}

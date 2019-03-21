@@ -11,15 +11,15 @@ var BindTo = ":7606"
 var ConfigLocation = ""
 
 type cfg struct {
-	buffer int
-	bind string
+	Buffer int
+	Bind   string
 }
 
 func SaveCFG() {
-	c := cfg {BufferSize, BindTo}
+	c := cfg{BufferSize, BindTo}
 
 	buff, _ := json.Marshal(c)
-	if f, err := os.OpenFile(ConfigLocation, os.O_CREATE | os.O_RDWR, 0554); err == nil {
+	if f, err := os.OpenFile(ConfigLocation, os.O_CREATE|os.O_RDWR, 0554); err == nil {
 		if _, err := f.Write(buff); err != nil {
 			fmt.Println(err.Error())
 			return
@@ -37,8 +37,8 @@ func LoadCFG() {
 		if f, err := os.Open(ConfigLocation); err == nil {
 			if _, err := f.Read(buff); err == nil {
 				if err := json.Unmarshal(buff, &c); err == nil {
-					BufferSize = c.buffer
-					BindTo = c.bind
+					BufferSize = c.Buffer
+					BindTo = c.Bind
 					return
 				}
 			}

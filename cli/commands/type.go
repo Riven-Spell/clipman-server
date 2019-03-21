@@ -6,6 +6,7 @@ var Aliases = map[string]Command{
 	"help":   help,
 	"config": config,
 	"exit": exit,
+	"user": user,
 }
 
 var HelpList = map[string]string{
@@ -25,4 +26,10 @@ changes where the server listens on.
 config password [password]:
 changes the admin password stored.`,
 	"exit": `Shuts down the server.`,
+	"user": `user save:
+Saves important information about the user.
+
+user password [password]:
+Changes the stored password for the user.
+`,
 }

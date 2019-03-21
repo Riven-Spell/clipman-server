@@ -1,11 +1,13 @@
 package commands
 
+import "github.com/virepri/clipman-server/shared"
+
 type Command struct {
 	Cmd  byte
 	Args []string
 }
 
-var Aliases = map[byte]func(Args []string, hasAuth *bool, hasAdmin *bool){
+var Aliases = map[byte]func(Device *shared.Device, Args []string){
 	0: becomeAdmin,
 	1: rcon,
 } //Pointers because some commands can elevate privileges.

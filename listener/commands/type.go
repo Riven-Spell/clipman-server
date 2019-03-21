@@ -5,7 +5,10 @@ type Command struct {
 	Args []string
 }
 
-var Aliases = map[byte]func(Args []string){}
+var Aliases = map[byte]func(Args []string, hasAuth *bool, hasAdmin *bool){
+	0: becomeAdmin,
+	1: rcon,
+} //Pointers because some commands can elevate privileges.
 
 /*
 Command structure:

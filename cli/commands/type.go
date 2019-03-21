@@ -5,8 +5,8 @@ type Command func(args []string)
 var Aliases = map[string]Command{
 	"help":   help,
 	"config": config,
-	"exit": exit,
-	"user": user,
+	"exit":   exit,
+	"user":   user,
 }
 
 var HelpList = map[string]string{

@@ -10,7 +10,10 @@ type Command struct {
 var Aliases = map[byte]func(Device *shared.Device, Args []string){
 	0: becomeAdmin,
 	1: rcon,
+	2: getClip,
+	3: setClip,
 } //Pointers because some commands can elevate privileges.
+//For now, clients will have just one command available to the server: 0 updateClip
 
 /*
 Command structure:

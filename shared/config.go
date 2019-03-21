@@ -12,13 +12,13 @@ var PassHash = "" //Hashes should be SHA256
 var ConfigLocation = ""
 
 type cfg struct {
-	Buffer int
-	Bind string
+	Buffer   int
+	Bind     string
 	PassHash string
 }
 
 func SaveCFG() {
-	c := cfg {BufferSize, BindTo, PassHash}
+	c := cfg{BufferSize, BindTo, PassHash}
 
 	buff, _ := json.Marshal(c)
 	if f, err := os.OpenFile(ConfigLocation, os.O_CREATE|os.O_RDWR, 0666); err == nil {

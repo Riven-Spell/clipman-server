@@ -21,7 +21,7 @@ func StartListener() {
 
 	for {
 		if c, err := listener.Accept(); err == nil {
-			d := shared.Device{Conn:c, HasAuth:false, HasAdmin:false}
+			d := shared.Device{Conn: c, HasAuth: false, HasAdmin: false}
 			devices = append(devices, d)
 			go handleConn(d)
 		}

@@ -12,12 +12,17 @@ var HelpList = map[string]string{
 	"help": `displays this text`,
 	"config": `config save:
 saves the config.
+
 config reload:
 reloads the config, to undo changes. This is not equivalent to a server restart. 
 
 config buffer [size]:
 changes the buffer size.
+
 config bind [port]:
-changes where the server listens on.`,
+changes where the server listens on.
+
+config password [password]:
+changes the admin password stored.`,
 	"exit": `Shuts down the server.`,
 }

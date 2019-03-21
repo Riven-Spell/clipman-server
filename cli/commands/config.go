@@ -1,6 +1,8 @@
 package commands
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"github.com/virepri/clipman-server/shared"
 	"strconv"
@@ -29,6 +31,13 @@ func config(args []string) {
 				shared.BindTo = args[1]
 			}
 			fmt.Println("The tcp listener binds to", shared.BindTo)
+		case "password":
+			if len(args) >= 2 {
+				h := sha256.New()
+				h.Write([]byte(args[1]))
+				shared.PassHash = hex.EncodeToString(h.Sum(nil))
+			}
+			fmt.Println("Your password has been changed.")
 		default:
 			help([]string{"config"})
 		}

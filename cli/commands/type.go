@@ -27,7 +27,7 @@ config password [password]:
 changes the admin password stored.`,
 	"exit": `Shuts down the server.`,
 	"user": `user save:
-Saves important information about the user.
+Saves user info.
 
 user password [password]:
 Changes the stored password for the user.

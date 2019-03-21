@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var reader *bufio.Reader
+var Reader *bufio.Reader
 
 func StartCLI() {
 	defer shared.ActiveServices.Done()
@@ -17,7 +17,7 @@ func StartCLI() {
 	fmt.Println("clipman-server version " + shared.Version)
 	fmt.Println("Enter \"help\" for information on various commands.")
 
-	reader = bufio.NewReader(os.Stdin)
+	Reader = bufio.NewReader(os.Stdin)
 
 	for {
 		fmt.Print("> ")
@@ -32,7 +32,7 @@ func StartCLI() {
 }
 
 func readLine() string {
-	if str, err := reader.ReadString('\n'); err == nil {
+	if str, err := Reader.ReadString('\n'); err == nil {
 		return strings.Trim(str, "\n")
 	} else {
 		return ""

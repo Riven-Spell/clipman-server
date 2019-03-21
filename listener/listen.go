@@ -9,8 +9,6 @@ import (
 
 var listener net.Listener
 
-var devices []shared.Device
-
 //TODO: Add TLS
 func StartListener() {
 	var err error
@@ -22,7 +20,7 @@ func StartListener() {
 	for {
 		if c, err := listener.Accept(); err == nil {
 			d := shared.Device{Conn: c, HasAuth: false, HasAdmin: false}
-			devices = append(devices, d)
+			shared.Devices = append(shared.Devices, d)
 			go handleConn(d)
 		}
 	}

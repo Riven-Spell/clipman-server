@@ -8,6 +8,11 @@ import (
 func setClip(device *shared.Device, args []string) {
 	if device.HasAuth && len(args) >= 1 {
 		user.ClipboardContent = args[0]
-		//TODO: divvy out the new content to clients.
+		buff := []byte{0, 10}
+		buff = append(buff, []byte(user.ClipboardContent)...)
+
+		for _,d := range shared.Devices {
+			_,_ = d.Conn.Write(buff)
+		}
 	}
 }

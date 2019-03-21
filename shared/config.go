@@ -21,7 +21,7 @@ func SaveCFG() {
 	c := cfg {BufferSize, BindTo, PassHash}
 
 	buff, _ := json.Marshal(c)
-	if f, err := os.OpenFile(ConfigLocation, os.O_CREATE | os.O_RDWR, 0554); err == nil {
+	if f, err := os.OpenFile(ConfigLocation, os.O_CREATE|os.O_RDWR, 0666); err == nil {
 		if _, err := f.Write(buff); err != nil {
 			fmt.Println(err.Error())
 			return

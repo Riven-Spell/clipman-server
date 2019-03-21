@@ -16,7 +16,9 @@ func StartListener() {
 		os.Exit(0)
 	}
 
-	if c, err := listener.Accept(); err == nil {
-		go handleConn(c)
+	for {
+		if c, err := listener.Accept(); err == nil {
+			go handleConn(c)
+		}
 	}
 }

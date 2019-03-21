@@ -14,7 +14,7 @@ func handleConn(device shared.Device) {
 			cmd := commands.ParseCmd(buff)
 
 			if v, ok := commands.Aliases[cmd.Cmd]; ok {
-				v(cmd.Args, &device.HasAuth, &device.HasAdmin)
+				v(&device, cmd.Args)
 			}
 		}
 	}

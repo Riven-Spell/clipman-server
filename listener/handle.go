@@ -3,18 +3,19 @@ package listener
 import (
 	"github.com/virepri/clipman-server/listener/commands"
 	"github.com/virepri/clipman-server/shared"
-	"net"
 )
 
-func handleConn(conn net.Conn) {
-	defer conn.Close()
+func handleConn(device shared.Device) {
+	defer device.Conn.Close()
 
 	buff := make([]byte, shared.BufferSize)
 	for {
-		if _, err := conn.Read(buff); err == nil {
+		if _, err := device.Conn.Read(buff); err == nil {
 			cmd := commands.ParseCmd(buff)
 
-			commands.Aliases[cmd.Cmd](cmd.Args)
+			if v, ok := commands.Aliases[cmd.Cmd]; ok {
+				go v(&device, cmd.Args)
+			}
 		}
 	}
 }

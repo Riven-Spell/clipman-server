@@ -3,23 +3,27 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/virepri/clipman-server/user"
 	"os"
 )
 
 var BufferSize = 1024
 var BindTo = ":7606"
+var PassHash = "" //Hashes should be SHA256
 var ConfigLocation = ""
 
 type cfg struct {
-	buffer int
-	bind string
+	Buffer    int
+	Bind      string
+	AdminHash string
+	UserHash string
 }
 
 func SaveCFG() {
-	c := cfg {BufferSize, BindTo}
+	c := cfg{BufferSize, BindTo, PassHash, user.UserPassHash}
 
 	buff, _ := json.Marshal(c)
-	if f, err := os.OpenFile(ConfigLocation, os.O_CREATE | os.O_RDWR, 0554); err == nil {
+	if f, err := os.OpenFile(ConfigLocation, os.O_CREATE|os.O_RDWR, 0666); err == nil {
 		if _, err := f.Write(buff); err != nil {
 			fmt.Println(err.Error())
 			return
@@ -37,8 +41,10 @@ func LoadCFG() {
 		if f, err := os.Open(ConfigLocation); err == nil {
 			if _, err := f.Read(buff); err == nil {
 				if err := json.Unmarshal(buff, &c); err == nil {
-					BufferSize = c.buffer
-					BindTo = c.bind
+					BufferSize = c.Buffer
+					BindTo = c.Bind
+					PassHash = c.AdminHash
+					user.UserPassHash = c.UserHash
 					return
 				}
 			}

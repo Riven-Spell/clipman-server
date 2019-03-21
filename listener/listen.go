@@ -9,6 +9,7 @@ import (
 
 var listener net.Listener
 
+//TODO: Add TLS
 func StartListener() {
 	var err error
 	if listener, err = net.Listen("tcp", shared.BindTo); err != nil {
@@ -18,7 +19,9 @@ func StartListener() {
 
 	for {
 		if c, err := listener.Accept(); err == nil {
-			go handleConn(c)
+			d := shared.Device{Conn: c, HasAuth: false, HasAdmin: false}
+			shared.Devices = append(shared.Devices, d)
+			go handleConn(d)
 		}
 	}
 }

@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var reader *bufio.Reader
+var Reader *bufio.Reader
 
 func StartCLI() {
 	defer shared.ActiveServices.Done()
@@ -17,18 +17,22 @@ func StartCLI() {
 	fmt.Println("clipman-server version " + shared.Version)
 	fmt.Println("Enter \"help\" for information on various commands.")
 
-	reader = bufio.NewReader(os.Stdin)
+	Reader = bufio.NewReader(os.Stdin)
 
 	for {
 		fmt.Print("> ")
 		input := strings.Split(readLine(), " ")
 
-		commands.Aliases[input[0]](input[1:])
+		if v, ok := commands.Aliases[input[0]]; ok {
+			v(input[1:])
+		} else {
+			fmt.Println(input[0], "is not an available command. Check help.")
+		}
 	}
 }
 
 func readLine() string {
-	if str, err := reader.ReadString('\n'); err == nil {
+	if str, err := Reader.ReadString('\n'); err == nil {
 		return strings.Trim(str, "\n")
 	} else {
 		return ""

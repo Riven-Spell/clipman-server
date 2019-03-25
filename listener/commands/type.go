@@ -12,6 +12,7 @@ var Aliases = map[byte]func(Device *shared.Device, Args []string){
 	1: rcon,
 	2: getClip,
 	3: setClip,
+	4: login,
 } //Pointers because some commands can elevate privileges.
 //For now, clients will have just one command available to the server: 0 updateClip
 
@@ -20,6 +21,20 @@ Command structure:
 [CMD, 10, ...., 10, ...., 0]
 Every ASCII LF (\n) character is a new argument.
 Every command ends with a NULL byte.
+*/
+
+/*
+Server commands:
+0: becomeAdmin
+1: rcon
+2: getClip
+3: setClip
+4: login
+
+Client commands:
+0 setClip
+1 success
+2 failure
 */
 func ParseCmd(buffer []byte) Command {
 	cmd := Command{Cmd: buffer[0], Args: make([]string, 0)}

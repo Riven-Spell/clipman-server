@@ -7,6 +7,10 @@ import (
 )
 
 func debug(args []string) {
+	if len(args) == 0 {
+		return
+	}
+
 	switch args[0] {
 	case "clipboard":
 		fmt.Println(user2.ClipboardContent)

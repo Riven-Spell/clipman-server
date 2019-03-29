@@ -11,6 +11,7 @@ var BufferSize = 1024
 var BindTo = ":7606"
 var PassHash = "" //Hashes should be SHA256
 var ConfigLocation = ""
+var PrintCMD = false
 
 type cfg struct {
 	Buffer    int

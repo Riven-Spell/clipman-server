@@ -7,6 +7,7 @@ var Aliases = map[string]Command{
 	"config": config,
 	"exit":   exit,
 	"user":   user,
+	"debug":  debug,
 }
 
 var HelpList = map[string]string{
@@ -32,4 +33,14 @@ Saves user info.
 user password [password]:
 Changes the stored password for the user.
 `,
+	"debug":`debug is a TEMPORARY utility.
+
+debug clipboard:
+Print the current clipboard content
+
+debug devices:
+Print the connected devices.
+
+debug printcmd:
+Toggle the option to print commands issued by clients.`,
 }

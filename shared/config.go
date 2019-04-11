@@ -29,6 +29,8 @@ type cfg struct {
 func SaveCFG() {
 	c := cfg{BufferSize, BindTo, PassHash, user.UserPassHash, PrivKeyPath, PubKeyPath, TLSEnabled}
 
+	_ = os.MkdirAll(ConfigLocation, 0600) //Who cares
+
 	buff, _ := json.Marshal(c)
 	if f, err := os.OpenFile(ConfigLocation, os.O_CREATE|os.O_RDWR, 0666); err == nil {
 		if _, err := f.Write(buff); err != nil {

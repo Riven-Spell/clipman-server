@@ -10,18 +10,24 @@ import (
 var BufferSize = 1024
 var BindTo = ":7606"
 var PassHash = "" //Hashes should be SHA256
+var PrivKeyPath = ""
+var PubKeyPath = ""
+var TLSEnabled = false
 var ConfigLocation = ""
 var PrintCMD = false
 
 type cfg struct {
-	Buffer    int
-	Bind      string
-	AdminHash string
-	UserHash string
+	Buffer         int
+	Bind           string
+	AdminHash      string
+	UserHash       string
+	PrivateKeyPath string
+	PublicCertPath string
+	TLSEnabled     bool
 }
 
 func SaveCFG() {
-	c := cfg{BufferSize, BindTo, PassHash, user.UserPassHash}
+	c := cfg{BufferSize, BindTo, PassHash, user.UserPassHash, PrivKeyPath, PubKeyPath, TLSEnabled}
 
 	buff, _ := json.Marshal(c)
 	if f, err := os.OpenFile(ConfigLocation, os.O_CREATE|os.O_RDWR, 0666); err == nil {
@@ -46,6 +52,9 @@ func LoadCFG() {
 					BindTo = c.Bind
 					PassHash = c.AdminHash
 					user.UserPassHash = c.UserHash
+					PrivKeyPath = c.PrivateKeyPath
+					PubKeyPath = c.PublicCertPath
+					TLSEnabled = c.TLSEnabled
 					return
 				}
 			}

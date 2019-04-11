@@ -13,6 +13,7 @@ func main() {
 
 	if u, err := user.Current(); err == nil {
 		shared.ConfigLocation = u.HomeDir + "/.config/clipman-server.cfg"
+		shared.ConfigDir = u.HomeDir + "/.config"
 	} else {
 		fmt.Println("Can't get current user:")
 		fmt.Println(err.Error())

@@ -14,6 +14,7 @@ var PrivKeyPath = ""
 var PubKeyPath = ""
 var TLSEnabled = false
 var ConfigLocation = ""
+var ConfigDir = ""
 var PrintCMD = false
 
 type cfg struct {
@@ -29,7 +30,7 @@ type cfg struct {
 func SaveCFG() {
 	c := cfg{BufferSize, BindTo, PassHash, user.UserPassHash, PrivKeyPath, PubKeyPath, TLSEnabled}
 
-	_ = os.MkdirAll(ConfigLocation, 0600) //Who cares
+	_ = os.MkdirAll(ConfigDir, 0600) //Who cares
 
 	buff, _ := json.Marshal(c)
 	if f, err := os.OpenFile(ConfigLocation, os.O_CREATE|os.O_RDWR, 0666); err == nil {

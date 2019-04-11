@@ -26,7 +26,20 @@ config bind [port]:
 changes where the server listens on.
 
 config password [password]:
-changes the admin password stored.`,
+changes the admin password stored.
+
+config tls:
+	config tls certlocation <FS location>:
+	Sets the location of the certificate.
+
+	config tls keylocation <FS location>:
+	Sets the location of your private key.
+
+	config tls toggle:
+	Toggles TLS on/off
+
+	config tls:
+	Lists TLS configuration.`,
 	"exit": `Shuts down the server.`,
 	"user": `user save:
 Saves user info.

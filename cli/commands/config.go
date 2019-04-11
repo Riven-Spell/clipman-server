@@ -36,8 +36,32 @@ func config(args []string) {
 				h := sha256.New()
 				h.Write([]byte(args[1]))
 				shared.PassHash = hex.EncodeToString(h.Sum(nil))
+				fmt.Println("Your password has been changed.")
+			} else {
+				fmt.Println("Please supply a password.")
 			}
-			fmt.Println("Your password has been changed.")
+		case "tls":
+			if len(args) >= 2 {
+				switch args[1] {
+				case "certlocation":
+					if len(args) > 3 {
+						shared.PubKeyPath = args[2]
+					}
+					fmt.Println("Certificate is stored @", shared.PubKeyPath)
+				case "keylocation":
+					if len(args) > 3 {
+						shared.PrivKeyPath = args[2]
+					}
+					fmt.Println("Private key is stored @", shared.PrivKeyPath)
+				case "toggle":
+					shared.TLSEnabled = !shared.TLSEnabled
+					fmt.Println("TLS enabled:", shared.TLSEnabled)
+				default:
+					fmt.Println("Certificate is stored @", shared.PubKeyPath)
+					fmt.Println("Private key is stored @", shared.PrivKeyPath)
+					fmt.Println("TLS enabled:", shared.TLSEnabled)
+				}
+			}
 		default:
 			help([]string{"config"})
 		}

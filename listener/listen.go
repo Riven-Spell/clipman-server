@@ -14,6 +14,9 @@ func StartListener() {
 	var err error
 
 	if !shared.TLSEnabled {
+		fmt.Println("WARNING: Leaving TLS off exposes clients to unnecessary danger of man in the middle attacks.")
+		fmt.Println("Use with caution. Do not handle sensitive data with TLS disabled.")
+
 		if listener, err = net.Listen("tcp", shared.BindTo); err != nil {
 			fmt.Println(err.Error())
 			os.Exit(0)

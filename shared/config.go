@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/virepri/clipman-server/user"
 	"os"
+	"path/filepath"
 )
 
 var BufferSize = 1024
@@ -28,6 +29,18 @@ type cfg struct {
 }
 
 func SaveCFG() {
+	if PrivKeyPath != "" {
+		if pkp, err := filepath.Abs(PrivKeyPath); err == nil {
+			PrivKeyPath = pkp
+		}
+	}
+
+	if PubKeyPath != "" {
+		if pkp, err := filepath.Abs(PubKeyPath); err == nil {
+			PubKeyPath = pkp
+		}
+	}
+
 	c := cfg{BufferSize, BindTo, PassHash, user.UserPassHash, PrivKeyPath, PubKeyPath, TLSEnabled}
 
 	_ = os.MkdirAll(ConfigDir, 0600) //Who cares

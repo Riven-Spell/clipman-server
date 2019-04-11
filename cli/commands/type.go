@@ -2,6 +2,7 @@ package commands
 
 type Command func(args []string)
 
+//TODO: TLS commands
 var Aliases = map[string]Command{
 	"help":   help,
 	"config": config,
@@ -33,7 +34,7 @@ Saves user info.
 user password [password]:
 Changes the stored password for the user.
 `,
-	"debug":`debug is a TEMPORARY utility.
+	"debug": `debug is a TEMPORARY utility.
 
 debug clipboard:
 Print the current clipboard content

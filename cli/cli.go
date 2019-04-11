@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/virepri/clipman-server/cli/commands"
 	"github.com/virepri/clipman-server/shared"
+	"runtime"
 	"os"
 	"strings"
 )
@@ -33,6 +34,10 @@ func StartCLI() {
 
 func readLine() string {
 	if str, err := Reader.ReadString('\n'); err == nil {
+		fmt.Println([]byte(str))
+		if runtime.GOOS == "windows" {
+			return strings.Trim(str, string([]byte{13,10}))
+		}
 		return strings.Trim(str, "\n")
 	} else {
 		return ""

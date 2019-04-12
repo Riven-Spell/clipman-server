@@ -19,7 +19,7 @@ func handleConn(device shared.Device) {
 			}
 
 			if v, ok := commands.Aliases[cmd.Cmd]; ok {
-				go v(&device, cmd.Args)
+				go v(&device, cmd.Params)
 			}
 		}
 	}
